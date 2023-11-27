@@ -25,7 +25,7 @@ class ErrorLogger {
   }
 
   isTrustError(error) {
-    if (error instanceof AppError) {
+    if (error instanceof AppErrors) {
       return error.isOperational;
     } else {
       return false;
