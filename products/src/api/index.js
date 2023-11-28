@@ -1,5 +1,4 @@
-import customer from "./customer.js";
 import products from "./products.js";
-import shopping from "./shopping.js";
+import appEvents from "./app-events.js";
 
-export { customer, products, shopping };
+export { products, appEvents };
