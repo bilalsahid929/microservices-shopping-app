@@ -45,3 +45,14 @@ export function FormateData(data) {
     throw new Error("Data Not found!");
   }
 }
+
+//Raise Events
+export async function PublishCustomerEvent(payload) {
+  // axios.post("http://customer:8001/app-events/", {
+  //   payload,
+  // });
+
+  axios.post(`http://localhost:8000/customer/app-events/`, {
+    payload,
+  });
+}
