@@ -48,21 +48,21 @@ export function FormateData(data) {
 
 //Raise Events
 export async function PublishCustomerEvent(payload) {
-  axios.post("http://customer:8001/app-events/", {
+  // axios.post("http://customer:8001/app-events/", {
+  //   payload,
+  // });
+
+  axios.post(`http://localhost:8000/customer/app-events/`, {
     payload,
   });
-
-  //     axios.post(`${BASE_URL}/customer/app-events/`,{
-  //         payload
-  //     });
 }
 
 export async function PublishShoppingEvent(payload) {
-  // axios.post('http://gateway:8000/shopping/app-events/',{
-  //         payload
-  // });
-
-  axios.post(`http://shopping:8003/app-events/`, {
+  axios.post("http://localhost:8000/shopping/app-events/", {
     payload,
   });
+
+  // axios.post(`http://shopping:8003/app-events/`, {
+  //   payload,
+  // });
 }
