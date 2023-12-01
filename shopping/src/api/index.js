@@ -1,3 +1,3 @@
 import shopping from "./shopping.js";
-
-export { shopping };
+import appEvents from "./app-events.js";
+export { appEvents, shopping };

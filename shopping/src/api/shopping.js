@@ -1,11 +1,9 @@
 import ShoppingService from "../services/shopping-service.js";
-import UserService from "../services/customer-service.js";
 import UserAuth from "./middlewares/auth.js";
-import { PublishCustomerEvent } from "../utils/index";
+import { PublishCustomerEvent } from "../utils/index.js";
 
 export default (app) => {
   const service = new ShoppingService();
-  const userService = new UserService();
 
   app.post("/order", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
@@ -27,7 +25,7 @@ export default (app) => {
     try {
       const { data } = await service.GetOrders(_id);
 
-      return res.status(200).json(data.orders);
+      return res.status(200).json(data);
     } catch (err) {
       next(err);
     }
@@ -36,8 +34,8 @@ export default (app) => {
   app.get("/cart", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
     try {
-      const { data } = await userService.GetShopingDetails(_id);
-      return res.status(200).json(data.cart);
+      const { data } = await service.GetCart({ _id });
+      return res.status(200).json(data);
     } catch (err) {
       next(err);
     }
