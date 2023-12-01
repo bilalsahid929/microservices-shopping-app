@@ -1,4 +1,4 @@
-import { OrderModel } from "../models/index.js";
+import { OrderModel, CartModel } from "../models/index.js";
 import { v4 as uuidv4 } from "uuid";
 import AppErrors from "../../utils/app-errors.js";
 const { APIError, BadRequestError, STATUS_CODES } = AppErrors;
