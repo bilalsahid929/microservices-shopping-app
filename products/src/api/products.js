@@ -86,7 +86,7 @@ export default (app) => {
         "REMOVE_FROM_WISHLIST"
       );
       PublishCustomerEvent(data);
-      return res.status(200).json(data.data.product);
+      return res.status(200).json(data);
     } catch (err) {
       next(err);
     }
@@ -112,26 +112,57 @@ export default (app) => {
       next(err);
     }
   });
-
   app.delete("/cart/:id", UserAuth, async (req, res, next) => {
     const { _id } = req.user;
+    const productId = req.params.id;
 
-    try {
-      const { data } = await service.GetProductPayload(
-        _id,
-        { productId: req.body._id, qty: req.body.qty },
-        "REMOVE_FROM_CART"
-      );
-      PublishCustomerEvent(data);
-      PublishShoppingEvent(data);
-      const response = {
-        product: data.data.product,
-        unit: data.data.qty,
-      };
-      return res.status(200).json(response);
-    } catch (err) {
-      next(err);
-    }
+    const { data } = await service.GetProductPayload(
+      _id,
+      { productId },
+      "REMOVE_FROM_CART"
+    );
+
+    PublishCustomerEvent(data);
+    PublishShoppingEvent(data);
+
+    const response = { product: data.data.product, unit: data.data.qty };
+
+    res.status(200).json(response);
+  });
+
+  // app.delete("/cart/:id", UserAuth, async (req, res, next) => {
+  //   const { _id } = req.user;
+
+  //   try {
+  //     const { data } = await service.GetProductPayload(
+  //       _id,
+  //       { productId: req.body._id, qty: req.body.qty },
+  //       "REMOVE_FROM_CART"
+  //     );
+  //     PublishCustomerEvent(data);
+  //     PublishShoppingEvent(data);
+  //     const response = {
+  //       product: data.data.product,
+  //       unit: data.data.qty,
+  //     };
+  //     return res.status(200).json(response);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // });
+  app.delete("/wishlist/:id", UserAuth, async (req, res, next) => {
+    const { _id } = req.user;
+    const productId = req.params.id;
+
+    const { data } = await service.GetProductPayload(
+      _id,
+      { productId },
+      "REMOVE_FROM_WISHLIST"
+    );
+    // PublishCustomerEvent(data);
+    PublishMessage(channel, CUSTOMER_SERVICE, JSON.stringify(data));
+
+    res.status(200).json(data.data.product);
   });
 
   //get Top products and category
