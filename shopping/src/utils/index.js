@@ -1,4 +1,5 @@
 import { genSalt, hash } from "bcrypt";
+import axios from "axios";
 import pkg from "jsonwebtoken";
 const { sign, verify } = pkg;
 import { APP_SECRET } from "../config/index.js";
