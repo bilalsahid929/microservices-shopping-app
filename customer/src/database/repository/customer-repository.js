@@ -152,7 +152,6 @@ class CustomerRepository {
     const product = {
       _id,
       name,
-      desc,
       price,
       banner,
     };
@@ -170,7 +169,7 @@ class CustomerRepository {
         if (cartItems.length > 0) {
           let isExist = false;
           cartItems.map((item) => {
-            if (item.product._id.toString() === product._id.toString()) {
+            if (item.product._id.toString() === _id.toString()) {
               if (isRemove) {
                 cartItems.splice(cartItems.indexOf(item), 1);
               } else {
