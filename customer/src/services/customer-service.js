@@ -146,6 +146,8 @@ class CustomerService {
   }
 
   async ManageOrder(customerId, order) {
+    console.log("customerId", customerId);
+    console.log("order", order);
     try {
       const orderResult = await this.repository.AddOrderToProfile(
         customerId,

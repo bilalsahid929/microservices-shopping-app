@@ -9,7 +9,7 @@ class ShoppingService {
 
   async GetCart({ _id }) {
     try {
-      const cartItems = await this.repository.Cart(_id);
+      const cartItems = await this.repository.Cart({ _id });
       return FormateData(cartItems);
     } catch (error) {
       throw error;
@@ -53,6 +53,7 @@ class ShoppingService {
   }
 
   async SubscribeEvents(payload) {
+    console.log("payload", payload);
     payload = JSON.parse(payload);
     const { event, data } = payload;
     const { userId, product, qty } = data;
