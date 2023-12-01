@@ -2,7 +2,7 @@ import express, { json, urlencoded } from "express";
 import path from "path";
 import cors from "cors";
 
-import { shopping } from "./api/index.js";
+import { shopping, appEvents } from "./api/index.js";
 import HandleErrors from "./utils/error-handler.js";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
@@ -12,6 +12,7 @@ export default async (app) => {
   app.use(cors());
   app.use(express.static(__dirname + "/public"));
 
+  appEvents(app);
   //api
 
   shopping(app);
